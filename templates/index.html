@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>URL Shortener</title>
+</head>
+<body>
+    <h1>URL Shortener</h1>
+    <form action="/shorten" method="post">
+        <label for="url">URL:</label>
+        <input type="text" name="url" id="url" required>
+        <button type="submit">Shorten</button>
+    </form>
+    <br>
+    {{if .Status}}
+        <p>Status: {{.Status}}</p>
+    {{end}}
+    {{if .Link}}
+        <p>Original URL: <a href="{{.Link}}" target="_blank">{{.Link}}</a></p>
+    {{end}}
+    {{if .ShortURL}}
+        <p>Shortened URL: <a href="{{.ShortURL}}" target="_blank">{{.ShortURL}}</a></p>
+    {{end}}
+    {{if .CleanupIn}}
+        <p>Cleanup In: {{.CleanupIn}}</p>
+    {{end}}
+</body>
+</html>
