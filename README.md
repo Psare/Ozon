@@ -5,4 +5,4 @@ grpc не реализован
 чтобы проверить локально можно изменить мейн и добавить 
 storage := flag.String("storage", "in-memory", "Storage type: in-memory or postgres")
 	flag.Parse()
-и изменить датубазу
+и изменить database.go на вашу конфигурацию 
