@@ -15,7 +15,6 @@ import (
 	"time"
 
 	"github.com/gorilla/mux"
-	_ "github.com/mattn/go-sqlite3"
 )
 
 const (
@@ -55,7 +54,7 @@ func FormatCleanupTime(duration time.Duration) string {
 }
 
 func indexPage(w http.ResponseWriter, r *http.Request) {
-	templ, err := template.ParseFiles("/Users/macbook/Desktop/urlshorter/templates/index.html")
+	templ, err := template.ParseFiles("templates/index.html")
 	if err != nil {
 		log.Println(err)
 	}
@@ -153,8 +152,7 @@ func redirectTo(w http.ResponseWriter, r *http.Request) {
 
 func Postmain() {
 	database.InitDB()
-
-	templates = template.Must(template.ParseFiles("/Users/macbook/Desktop/urlshorter/templates/index.html"))
+	templates = template.Must(template.ParseFiles("templates/index.html"))
 
 	go func() {
 		for {
@@ -178,9 +176,7 @@ func Postmain() {
 func PostmainInMemory() {
 	storage := inmemory.NewInMemoryStorage(cleanupInterval)
 	storage.StartCleanupRoutine()
-
-	templates = template.Must(template.ParseFiles("/Users/macbook/Desktop/urlshorter/templates/index.html"))
-
+	templates = template.Must(template.ParseFiles("templates/index.html"))
 	router := mux.NewRouter()
 	router.HandleFunc("/", routinmem.IndexPageMem)
 	router.HandleFunc("/shorten", routinmem.IndexPageMem)

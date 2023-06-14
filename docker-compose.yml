@@ -9,12 +9,15 @@ services:
       POSTGRES_DB: ozon
     ports:
       - 5432:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
   url-shortener:
     build:
-      context: ./cmd/ozon
-      dockerfile: ../../Dockerfile
+      context: ./
+      dockerfile: Dockerfile
     environment:
-      - STORAGE=postgres # or 'in-memory' based on your needs
+      - STORAGE=in-memory #или in-memory \ postgres
       - POSTGRES_HOST=postgres
       - POSTGRES_PORT=5432
       - POSTGRES_USER=myuser
@@ -24,3 +27,6 @@ services:
       - 8000:8000
     depends_on:
       - postgres
+
+volumes:
+  postgres_data:

@@ -24,7 +24,7 @@ func init() {
 }
 
 func IndexPageMem(w http.ResponseWriter, r *http.Request) {
-	templ, err := template.ParseFiles("/Users/macbook/Desktop/urlshorter/templates/index.html")
+	templ, err := template.ParseFiles("templates/index.html")
 	if err != nil {
 		log.Println(err)
 		w.WriteHeader(http.StatusInternalServerError)

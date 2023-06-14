@@ -1,23 +1,21 @@
-# Use the golang base image for building the Go application
-FROM golang:latest AS builder
+# Используем официальный образ Golang в качестве базового
+FROM golang:latest
 
-# Set the working directory
+# Устанавливаем рабочую директорию внутри контейнера
 WORKDIR /app
 
-# Copy the Go modules manifests
-COPY go.mod go.sum ./
-
-# Download the Go dependencies
-RUN go mod download
-
-# Copy the source code to the container
+# Копируем все файлы проекта в текущую директорию контейнера
 COPY . .
 
-# Build the Go application
-RUN go build -o main .
+# Загружаем зависимости
+RUN go mod download
 
-# Copy the built Go application from the builder stage
-COPY --from=builder /app/main /app/main
+# Собираем исполняемый файл
+RUN go build -o ozon ./cmd/ozon
 
-# Set the entrypoint command to run the Go application
-CMD ["/app/main"]
+# Открываем порт для доступа к приложению
+EXPOSE 8000
+
+CMD ["sleep", "3"]
+# Запускаем приложение
+CMD ["./ozon"]
